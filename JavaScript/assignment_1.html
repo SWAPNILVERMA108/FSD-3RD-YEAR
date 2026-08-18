@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    
+<div style="background-color: bisque;width: 300px; height: 300px;">
+    <h1>Online Shop</h1>
+    <li>
+        <ol>Rice : 500</ol>
+        <ol>Tea : 300</ol>
+        <ol>Coffee : 800</ol>
+        <ol>Sugar  : 400</ol>
+    </li>
+    &nbsp;
+
+    <button onclick="getDetails()">Click Me</button>
+
+
+
+
+
+
+
+</div>
+
+<script>
+function getDetails() {
+
+const products = {
+    Rice: {
+        price: 500,
+        image: "images/rice.jpg"
+    },
+    Tea: {
+        price: 300,
+        image: "images/tea.jpg"
+    },
+    Coffee: {
+        price: 800,
+        image: "images/coffee.jpg"
+    },
+    Sugar: {
+        price: 400,
+        image: "images/sugar.jpg"
+    }
+};
+
+ 
+
+    let product = prompt("Enter the product name");
+    let quantity = prompt("Enter the quantity");
+
+    document.write("Product : " + product + "<br>");
+
+    document.write("Quantity: " + quantity + "<br>");
+
+    if (products[product]) {
+    let price = products[product].price;
+    let image = products[product].image;
+    let total = price * quantity;
+
+    document.write("Total Price: " + total + "<br><br>");
+
+    document.write(`<br><img src="${image}" width="200">`);
+
+
+}
+}
+
+
+</script>
+
+    
+    
+</body>
+</html>
