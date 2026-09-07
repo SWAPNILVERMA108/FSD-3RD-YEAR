@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Booking System</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline;
+
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9c970;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+     </style>
+</head>
+<body>
+    <div class ="container" >
+    
+    <div>
+        <h1><img src="Bus.avif" alt="Bus" style="width: 100px; height: auto;">Bus Booking System</h1>
+    </div>
+    <h3>User Information</h3>
+    <form class="form">
+        <label for="name">User Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="age">User Age:</label>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="adhaar">Adhar Number:</label>
+        <input type="text" id="adhaar" name="adhaar"><br><br>
+
+        <label for="city">Select your city:</label>
+        <select id="city" name="city">
+            <option value="city1">Delhi</option>
+            <option value="city2">Lucknow</option>
+            <option value="city3">Ghaziabad</option>
+        </select><br><br>
+
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date"><br><br>
+
+        <h3>Bus Information</h3>
+
+        <label for="busNumber">Bus Number:</label>
+        <input type="text" id="busNumber" name="busNumber"><br><br>
+
+        <label for="busType">Bus Type:</label>
+        <select id="busType" name="busType">
+            <option value="ac">AC : 2000</option>
+            <option value="non-ac">Non-AC : 1000</option>
+        </select><br><br>
+        <label for="seat">Select Your Sheet</label>
+        <select id="seat" name= "seat">
+            <option value="seat1"> 1</option>
+            <option value="seat2"> 2</option>
+            <option value="seat3"> 3</option>
+            <option value="seat4"> 4</option>
+            <option value="seat5"> 5</option>
+
+        </select><br><br> 
+
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Handle form submission
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const adhaar = document.getElementById('adhaar').value;
+            const city = document.getElementById('city').value;
+            const date = document.getElementById('date').value;
+            const busNumber = document.getElementById('busNumber').value;
+            const busType = document.getElementById('busType').value;
+            const seat = document.getElementById('seat').value; 
+
+            // create a card like a ticket with the details and calculate the total price based on the bus type 
+            // improve the design of the ticket card using CSS
+// count based on no of sheets selected and bus type
+            let totalPrice = 0;
+            if (busType === 'ac') {
+                totalPrice = 2000;
+            } else if (busType === 'non-ac') {
+                totalPrice = 1000;
+            }
+            const ticketCard = document.createElement('div');
+            ticketCard.style.backgroundColor = '#f9c970';
+            ticketCard.style.padding = '20px';
+            ticketCard.style.borderRadius = '5px';
+            ticketCard.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+            ticketCard.style.marginTop = '20px';
+            ticketCard.style.width = '400px';
+            ticketCard.style.margin = '20px auto';
+            ticketCard.style.textAlign = 'center';
+            ticketCard.innerHTML = `
+                <h2>Ticket Details</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Adhaar Number:</strong> ${adhaar}</p>
+                <p><strong>City:</strong> ${city}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Bus Number:</strong> ${busNumber}</p>
+                <p><strong>Bus Type:</strong> ${busType}</p>
+                <p><strong>Seat:</strong> ${seat}</p>
+                <p><strong>Total Price:</strong> ${totalPrice}</p>  
+            `;
+            document.body.appendChild(ticketCard);
+
+
+
+        });
+
+        // if no info filled then show alert message
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const adhaar = document.getElementById('adhaar').value;
+            const city = document.getElementById('city').value;
+            const date = document.getElementById('date').value;
+            const busNumber = document.getElementById('busNumber').value;
+            const busType = document.getElementById('busType').value;
+            const seat = document.getElementById('seat').value; 
+
+            if (!name || !age || !adhaar || !city || !date || !busNumber || !busType || !seat) {
+                alert("Please fill all the details before submitting the form.");
+                return;
+            }
+        }); 
+        
+    </script>
+</body>
+</html>
