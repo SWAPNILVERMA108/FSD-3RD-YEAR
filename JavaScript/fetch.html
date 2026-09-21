@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY SHOP</title>
+    <style>
+        table{
+            width: 80%;
+            margin: auto;
+            padding: 10px;
+            font-size: 25px;
+            color: red;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>S.N.</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+
+        </tbody>
+    </table>
+
+
+    <script>
+        const ele = document.getElementById("data")
+        const URL = "https://dummyjson.com/products"
+
+        async function loadProduct(){
+            try{
+                const res = await fetch(URL)
+                const data = res.json();
+                console.log("Data", data.products)
+                let row=""
+                data.products.map((i, index)=>{
+                    row+=`
+                    <tr>
+                        <td>${index+1}</td>
+                        <td>${i.title}</td>
+                        <td>img src=${i.image[0]}</td>
+                        <td>${i.price}</td>
+                        <td>${i.category}</td>
+                    </tr>
+                    `;
+                    ele.innerHTML = row;
+                })
+            }
+            catch(err){
+                console.log("ERROR", err)
+                ele.innerHTML = `<tr>Network Error</tr>`
+            }
+        }
+
+        loadProduct()
+    </script>
+</body>
+</html>
