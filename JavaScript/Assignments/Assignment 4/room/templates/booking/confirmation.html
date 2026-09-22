@@ -1,0 +1,8 @@
+{% extends 'booking/base.html' %}
+{% block title %}Booking confirmed · CampusBook{% endblock %}
+{% block content %}
+<section class="container text-center py-5"><div class="confirmation mx-auto"><div class="check">✓</div><p class="eyebrow">BOOKING CONFIRMED</p><h1 class="display-4 fw-bold">Your classroom is<br><em>reserved.</em></h1><p class="intro">Your space is confirmed, {{ booking.guest_name }}.</p>
+  <div class="confirmation-card card shadow-sm border-0"><div class="card-body"><span>Confirmation</span><strong>{{ booking.confirmation_code }}</strong></div><div class="card-body"><span>Classroom</span><strong>{{ booking.classroom.name }}</strong></div><div class="card-body"><span>Dates</span><strong>{{ booking.check_in|date:'M j' }} — {{ booking.check_out|date:'M j, Y' }}</strong></div><div class="card-body"><span>Attendees</span><strong>{{ booking.guests }}</strong></div></div>
+  <p class="total">Booking cost: <strong>₹{{ booking.total|floatformat:0 }}</strong></p><a class="btn btn-primary px-4" href="{% url 'booking:home' %}">Find another classroom</a>
+</section>
+{% endblock %}

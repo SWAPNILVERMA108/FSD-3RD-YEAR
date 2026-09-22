@@ -2,7 +2,9 @@ import React from "react";
 
 const Food = () => {
     return (
+        
         <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
+           
             <div
                 style={{
                     border: "2px solid red",

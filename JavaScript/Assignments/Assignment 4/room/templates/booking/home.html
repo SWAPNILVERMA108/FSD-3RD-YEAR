@@ -1,0 +1,40 @@
+{% extends 'booking/base.html' %}
+{% block title %}Find a classroom · CampusBook{% endblock %}
+{% block content %}
+<section class="hero py-5">
+  <div class="container py-md-4">
+    <p class="eyebrow">CAMPUS SPACE RESERVATIONS</p>
+    <h1 class="display-3 fw-bold">Find a space to<br><em>learn together.</em></h1>
+    <p class="intro mb-4">Check classroom availability and reserve a college space in a few easy steps.</p>
+    <form method="get" class="search-card row g-3 align-items-end p-3 p-md-4 rounded shadow" novalidate>
+      <div class="col-md"><label class="form-label" for="{{ form.check_in.id_for_label }}">Check in</label>{{ form.check_in }}</div>
+      <div class="col-md"><label class="form-label" for="{{ form.check_out.id_for_label }}">Check out</label>{{ form.check_out }}</div>
+      <div class="col-md"><label class="form-label" for="{{ form.guests.id_for_label }}">Attendees</label>{{ form.guests }}</div>
+      <div class="col-md-auto"><button class="btn btn-primary w-100" type="submit">Check availability →</button></div>
+      {% if form.errors %}<div class="col-12 alert alert-danger mb-0 py-2">{% for field in form %}{% for error in field.errors %}{{ error }} {% endfor %}{% endfor %}</div>{% endif %}
+    </form>
+  </div>
+</section>
+
+{% if searched %}
+<section class="container py-5" id="rooms">
+  <div class="d-flex justify-content-between align-items-end mb-4"><div><p class="eyebrow">YOUR DATES</p><h2 class="display-6 fw-semibold">Available classrooms</h2></div><a class="link-success fw-semibold small" href="{% url 'booking:home' %}">Change search</a></div>
+  {% if classrooms %}
+    <div class="row g-4">
+    {% for classroom in classrooms %}
+      <article class="col-md-6 col-lg-4">
+        <div class="room-card card h-100 border-0 shadow-sm">
+        <div class="room-art art-{{ classroom.classroom_type }}"><span>{{ classroom.number }}</span></div>
+        <div class="card-body d-flex flex-column"><p class="room-type">{{ classroom.get_classroom_type_display }}</p><h3 class="card-title">{{ classroom.name }}</h3><p class="description">{{ classroom.description }}</p><p class="amenities">{{ classroom.amenities }}</p><div class="mt-auto d-flex justify-content-between align-items-center"><p class="mb-0"><strong>₹{{ classroom.rate_per_day|floatformat:0 }}</strong> <small>/ day</small></p><a class="btn btn-outline-success btn-sm" href="{% url 'booking:reserve' classroom.id %}?check_in={{ form.cleaned_data.check_in|date:'Y-m-d' }}&check_out={{ form.cleaned_data.check_out|date:'Y-m-d' }}&guests={{ form.cleaned_data.guests }}">Book classroom →</a></div></div>
+        </div>
+      </article>
+    {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-light text-center py-5"><h3 class="h4">No classrooms for these dates</h3><p class="mb-0">Try different dates or a smaller group size.</p></div>
+  {% endif %}
+</section>
+{% else %}
+<section class="container py-5"><div class="row g-4"><div class="col-md-4"><b>01</b><h3 class="h5 mt-2">Live availability</h3><p class="text-secondary">Only classrooms free for your chosen dates appear here.</p></div><div class="col-md-4"><b>02</b><h3 class="h5 mt-2">Simple booking</h3><p class="text-secondary">Enter your contact details once and receive a booking reference.</p></div><div class="col-md-4"><b>03</b><h3 class="h5 mt-2">Different spaces</h3><p class="text-secondary">Choose a lecture hall, computer lab, or seminar room.</p></div></div></section>
+{% endif %}
+{% endblock %}
