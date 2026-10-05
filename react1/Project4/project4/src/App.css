@@ -1,0 +1,22 @@
+nav {
+  background-color: #222;
+  padding: 15px;
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #00bcd4;
+}
+
+.page {
+  text-align: center;
+  margin-top: 50px;
+}
